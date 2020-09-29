@@ -2,9 +2,9 @@ name: Coverage upload test
 
 on:
   push:
-    branches: [ main , master]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   test:
@@ -17,8 +17,8 @@ jobs:
           - test-run-id: ubuntu
             os: ubuntu-latest
             
-          #- test-run-id: win
-          #  os: windows-latest
+          - test-run-id: win
+            os: windows-latest
             
     runs-on: ${{matrix.os}}
     
