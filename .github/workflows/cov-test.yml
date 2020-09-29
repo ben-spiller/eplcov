@@ -1,0 +1,40 @@
+name: Coverage upload test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    strategy:
+      # Disable fail fast since it's useful to see test results for all platforms even if some failed
+      fail-fast: false
+      
+      matrix:
+        include:
+          - test-run-id: ubuntu
+            os: ubuntu-latest
+            
+          #- test-run-id: win
+          #  os: windows-latest
+            
+    runs-on: ${{matrix.os}}
+    
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Pre-process file for this OS
+        working-directory: projectroot
+        shell: bash
+        run: |
+		  python update_pwd.py eplcoverage/epl_coverage.xml
+
+      - name: Upload to codecov
+        uses: codecov/codecov-action@v1
+        with:
+          file: projectroot/eplcoverage/epl_coverage.xml

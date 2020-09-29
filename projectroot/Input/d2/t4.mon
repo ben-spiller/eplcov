@@ -1,0 +1,16 @@
+event E{}
+
+monitor T4
+{
+	integer x := 1;
+	action onload()
+	{
+		log "Loaded monitor" at INFO;
+		if (x = 1 or x = 2) { // expected partial coverage
+		
+			on all E(){} // expected partial coverage
+		} else {
+			x := x+1; // expected no coverage
+		}
+	}
+}

@@ -1,0 +1,10 @@
+event E{}
+
+monitor T2
+{
+	action onload()
+	{
+		log "Loaded monitor" at INFO;
+		on all E(){}
+	}
+}

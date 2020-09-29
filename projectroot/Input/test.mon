@@ -1,0 +1,11 @@
+event E {}
+monitor m
+{
+	action onload() {
+		print "m loaded";
+		on all E() 
+		{
+			print "e received";
+		}
+	}
+}

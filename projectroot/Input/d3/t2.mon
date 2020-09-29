@@ -1,0 +1,12 @@
+event E{}
+
+monitor T2c
+{
+	action onload()
+	{
+		log "Loaded monitor" at INFO;
+		
+		// This file is different to the others - instructions on different lines
+		on all E(){}
+	}
+}
